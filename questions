@@ -1,0 +1,378 @@
+<?php
+
+/* $a = [
+    [
+        'name' => 'Kate',
+        'yers' => 16,
+        'marks' => [
+            'math' => 10,
+            'english' => 9,
+        ],
+    ],
+    [
+        'name' => 'Dima',
+        'yers' => 18,
+        'marks' => [
+            'math' => 9,
+            'english' => 7,
+        ],
+    ],
+    [
+        'name' => 'Sveta',
+        'yers' => 40,
+        'marks' => [
+            'math' => 5,
+            'english' => 12,
+        ],
+    ],
+    [
+        'name' => 'Viktor',
+        'yers' => 45,
+        'marks' => [
+            'math' => 11,
+            'english' => 9,
+        ],
+    ]
+];
+ */
+/* вывести в алфавитном порядке со средней оценкой и тех людей которым больше 15 но менше 41 */
+
+/* array_multisort($a);
+
+$data = [];
+
+foreach($a as $persone) {
+    if ($persone['yers'] > 15 && $persone['yers'] < 41) {
+
+        $persone['marks'] = array_sum($persone['marks'])/count($persone['marks']);
+        
+        $data[] = $persone;
+    }
+} 
+var_dump($data);*/
+
+/* $k = 6;
+
+$arr = [1,2,3,4,55,5,5,6,6,6,7,8];
+
+/* $array = array_diff($arr, [$k]); */
+
+/* $newArr = [];
+
+foreach ($arr as $value) {
+    if ($value != $k) {
+        $newArr[] = $value;
+    }
+}
+
+var_dump($newArr); */
+
+
+
+/* $cards = [
+    "2H", "3H", "4H", "5H", "6H", "7H", "8H", "9H", "10H", "JH", "QH", "KH", "AH",
+    "2D", "3D", "4D", "5D", "6D", "7D", "8D", "9D", "10D", "JD", "QD", "KD", "AD",
+    "2C", "3C", "4C", "5C", "6C", "7C", "8C", "9C", "10C", "JC", "QC", "KC", "AC",
+    "2S", "3S", "4S", "5S", "6S", "7S", "8S", "9S", "10S", "JS", "QS", "KS", "AS"
+];
+
+shuffle($cards);
+
+$quntity_playrs = 5;
+$distribution = 6;
+
+class Player
+{
+    public array $cards = [];
+    
+    public function __construct(array $cards)
+    {
+        $this->cards = $cards;
+    }
+    public function openCard(string $name)
+    {
+        echo "Карты игрока: №$name - ";
+        foreach ($this->cards as $card) {
+            echo "$card ";
+        }
+        echo PHP_EOL;
+    }
+}
+
+function distribution(int $quntity_playrs, $cards)
+{
+    $colods = array_chunk($cards, 6);
+
+    for ($i = 1; $i <= $quntity_playrs; $i++) {
+        $player[$i] = new Player($colods[$i]);
+        $player[$i]->openCard($i);
+    }
+}
+
+print_r(distribution($quntity_playrs, $cards)); */
+
+/* $cities = [
+    [
+        "name" => "Brest",
+        "x" => 52.1,
+        "y" => 23.68333
+    ],
+    [
+        "name" => "Vitebsk",
+        "x" => 55.18333,
+        "y" => 30.16667
+    ],
+    [
+        "name" => "Gomel",
+        "x" => 52.44167,
+        "y" => 31.0
+    ],
+    [
+        "name" => "Grodno",
+        "x" => 53.66667,
+        "y" => 23.81667
+    ],
+    [
+        "name" => "Minsk",
+        "x" => 53.91667,
+        "y" => 27.55
+    ],
+    [
+        "name" => "Mogilev",
+        "x" => 53.91667,
+        "y" => 30.35
+    ]
+];
+
+$range = 1000;
+
+class City {
+    public string $name;
+    public float $x;
+    public float $y;
+
+    public function __construct(string $name, float $x, float $y) {
+        $this->name = $name;
+        $this->x = $x;
+        $this->y = $y;
+    }
+}
+
+class Result {
+    public City $first;
+    public City $second;
+
+    public function __construct(City $first, City $second) {
+        $this->first = $first;
+        $this->second = $second;
+    }
+}
+
+function findClosestCities(array $cities, int $range) 
+{
+    $cityObj = [];
+
+    foreach ($cities as $city) {
+        $cityObj[] = new City($city['name'], $city['x'], $city['y']);
+    }
+
+    for ($i = 0; $i <= count($cityObj); $i++) {
+        if (array_key_exists($i, $cityObj)) {
+            $f[] = ($cityObj[$i]->x + $cityObj[$i]->y) / 2;
+            asort($f);
+            var_dump($f);
+        } else {
+            return;
+        }
+    }
+}
+
+findClosestCities($cities, $range); */
+
+interface HeroInterface {
+    public function attak(Hero $target);
+}
+
+interface ButtleInterface {
+    public function buttle(Hero $hero1, Hero $hero2);
+}
+
+class Hero implements HeroInterface {
+    private int $health;
+    private int $damage;
+
+    public function __construct(int $health, int $damage) {
+        $this->health = $health;
+        $this->damage = $damage;
+    }
+
+    public final function example() {
+
+    }
+
+    public function attak(Hero $target)
+    {
+        $currentHealth = $target->getHealth() - $this->damage;
+        echo $currentHealth;
+        $target->setHealth($currentHealth);
+    }
+
+    /**
+     * Get the value of damage
+     */ 
+    public function getDamage()
+    {
+        return $this->damage;
+    }
+
+    /**
+     * Set the value of damage
+     *
+     * @return  self
+     */ 
+    public function setDamage($damage)
+    {
+        $this->damage = $damage;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of health
+     */ 
+    public function getHealth()
+    {
+        return $this->health;
+    }
+
+    /**
+     * Set the value of health
+     *
+     * @return  self
+     */ 
+    public function setHealth($health)
+    {
+        $this->health = $health;
+
+        return $this;
+    }
+}
+
+class Buttle implements ButtleInterface {
+    public function buttle(Hero $hero1, Hero $hero2) {
+        
+    }
+}
+
+$hero1 = new Hero(100, 50);
+$hero2 = new Hero(150, 50);
+
+/* var_dump($hero1->attak($hero2)); */
+
+
+/* $obj = new class {
+    public function hello() {
+        echo 'hi a new class';
+    }
+};
+
+$obj->hello();
+ */
+
+
+/*  class MyIterator implements Iterator {
+    private $position = 0;
+    private array $data;
+
+    public function __construct(array $data) {
+        $this->data = $data;
+    }
+
+    public function rewind(): void {
+        reset($this->data);
+    }
+
+    public function valid(): bool {
+        return isset($this->data[$this->position]);
+    }
+
+    public function current() {
+        return $this->data[$this->position];
+    }
+
+    public function key() {
+        return $this->position;
+    }
+
+    public function next(): void {
+        ++$this->position;
+    }
+}
+
+$iterator = new MyIterator(
+);
+
+foreach ($iterator as $key => $value) {
+    echo "$key Value: $value\n";
+} */
+
+class RecursiveObjectIterator extends RecursiveArrayIterator {
+    public function __construct($array) {
+        parent::__construct($array, RecursiveArrayIterator::CHILD_ARRAYS_ONLY);
+    }
+
+    public function hasChildren(): bool {
+        return is_array($this->current()) || is_object($this->current());
+    }
+
+    public function getChildren(): ?RecursiveArrayIterator {
+        return new RecursiveObjectIterator($this->current());
+    }
+}
+
+// Пример использования рекурсивного итератора
+$data = [
+    [
+        "name" => "Brest",
+        "x" => 52.1,
+        "y" => 23.68333
+    ],
+    [
+        "name" => "Vitebsk",
+        "x" => 55.18333,
+        "y" => 30.16667
+    ],
+    [
+        "name" => "Gomel",
+        "x" => 52.44167,
+        "y" => 31.0
+    ],
+    [
+        "name" => "Grodno",
+        "x" => 53.66667,
+        "y" => 23.81667
+    ],
+    [
+        "name" => "Minsk",
+        "x" => 53.91667,
+        "y" => 27.55
+    ],
+    [
+        "name" => "Mogilev",
+        "x" => 53.91667,
+        "y" => 30.35
+    ]
+];
+
+$iterator = new RecursiveObjectIterator($data);
+
+foreach ($iterator as $key => $value) {
+    print_r("$key: ");
+    if (is_object($value)) {
+        print_r("Object\n");
+    } else {
+        print_r("$value\n");
+    }
+}
+
+$_SESSION['username'] = 'hi';
