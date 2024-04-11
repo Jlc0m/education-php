@@ -1,0 +1,22 @@
+
+function processDirectory($dir) {
+    $files = scandir($dir);
+    
+    foreach ($files as $file) {
+        if ($file == '.' || $file == '..') continue;
+        
+        $path = $dir . '/' . $file;
+        
+        if (is_dir($path)) {
+            processDirectory($path); // Рекурсивный вызов для обработки вложенной директории
+        } else {
+            processFile($path);
+        }
+    }
+}
+
+function processFile($file) {
+    echo "Processing file: $file\n";
+}
+
+processDirectory('C:\Users');
